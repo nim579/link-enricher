@@ -1,6 +1,6 @@
 {
   "name": "link-enricher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fetch oEmbed, Opeh Graph, etc info for links",
   "type": "module",
   "main": "./dist/link-enricher.cjs.js",
