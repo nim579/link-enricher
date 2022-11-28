@@ -1,0 +1,62 @@
+{
+  "name": "link-enricher",
+  "version": "1.0.0",
+  "description": "Fetch oEmbed, Opeh Graph, etc info for links",
+  "type": "module",
+  "main": "./dist/link-enricher.cjs.js",
+  "module": "./dist/link-enricher.es.js",
+  "exports": {
+    ".": {
+      "require": "./dist/link-enricher.cjs.js",
+      "default": "./dist/link-enricher.es.js"
+    },
+    "./dist/": "./dist/"
+  },
+  "scripts": {
+    "test": "NODE_OPTIONS='--experimental-loader @istanbuljs/esm-loader-hook' nyc mocha 'tests/**/*.test.ts'",
+    "build": "rollup -c",
+    "watch": "rollup -wc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nim579/link-enricher.git"
+  },
+  "keywords": [
+    "oEmbed",
+    "OpenGraph",
+    "manifest",
+    "favicon"
+  ],
+  "author": "Nick Iv",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nim579/link-enricher/issues"
+  },
+  "homepage": "https://github.com/nim579/link-enricher#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "content-disposition": "^0.5.4",
+    "got": "^11.8.5",
+    "lodash": "^4.17.21",
+    "mime": "^3.0.0"
+  },
+  "devDependencies": {
+    "@istanbuljs/esm-loader-hook": "^0.2.0",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "@rollup/plugin-typescript": "^9.0.2",
+    "@types/content-disposition": "^0.5.5",
+    "@types/lodash": "^4.14.189",
+    "@types/mime": "^3.0.1",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^18.11.9",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "eslint": "^8.28.0",
+    "mocha": "^10.1.0",
+    "nock": "^13.2.9",
+    "nyc": "^15.1.0",
+    "rollup": "^3.4.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
+  }
+}
