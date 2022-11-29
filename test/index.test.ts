@@ -1,5 +1,5 @@
 import assert from 'assert';
-import enrichLink from '../lib/index';
+import { enrichLink } from '../lib/index';
 
 import nock from 'nock';
 

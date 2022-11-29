@@ -17,7 +17,7 @@ enrichLink(url: string, userAgent?: string): Promise<LinkEnricherResult>
 ```
 
 ``` js
-import enrichLink from 'link-enricher';
+import { enrichLink } from 'link-enricher';
 
 enrichLink('https://journal.teletype.in/donations').then(result => {
   console.log(result);

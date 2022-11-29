@@ -52,4 +52,4 @@ const enrichLink = async (link: string, userAgent?: string): Promise<LinkEnriche
   return result;
 };
 
-export default enrichLink;
+export { enrichLink };
