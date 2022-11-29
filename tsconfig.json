@@ -5,15 +5,11 @@
       "es2021",
       "esnext"
     ],
-    "target": "es2021",
+    "target": "esnext",
     "module": "es2022",
-    "moduleResolution": "Node",
-    "outDir": "./dist",
-    "rootDir": "./",
     "declaration": true,
-    "declarationMap": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   }
 }

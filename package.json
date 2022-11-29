@@ -3,20 +3,21 @@
   "version": "1.0.1",
   "description": "Fetch oEmbed, Opeh Graph, etc info for links",
   "type": "module",
-  "main": "./dist/link-enricher.cjs.js",
-  "module": "./dist/link-enricher.es.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/cjs/link-enricher.js",
+  "module": "./dist/link-enricher.js",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/link-enricher.cjs.js",
-      "default": "./dist/link-enricher.es.js"
+      "require": "./dist/cjs/link-enricher.js",
+      "default": "./dist/link-enricher.js"
     },
     "./dist/": "./dist/"
   },
   "scripts": {
-    "test": "NODE_OPTIONS='--experimental-loader @istanbuljs/esm-loader-hook' nyc mocha 'tests/**/*.test.ts'",
+    "test": "NODE_OPTIONS='--experimental-loader @istanbuljs/esm-loader-hook' nyc mocha 'test/**/*.test.ts'",
     "build": "rollup -c",
-    "watch": "rollup -wc"
+    "watch": "rollup -wc",
+    "prepublishOnly": "rm -rf dist && npm test && npm run build"
   },
   "repository": {
     "type": "git",

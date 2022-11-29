@@ -2,8 +2,7 @@ import { getHead, getHtml, getJSON } from './fetch';
 import { file, FileResult, html, oembedJSON, OEmbedResult, oembedXML, WebpageResult } from './parse';
 import { userAgentHeader } from './utils';
 
-
-export type Result = {
+export type LinkEnricherResult = {
   image?: FileResult;
   video?: FileResult;
   attachment?: FileResult;
@@ -11,7 +10,7 @@ export type Result = {
   oembed?: OEmbedResult;
 };
 
-const enrichLink = async (link: string, userAgent?: string): Promise<Result> => {
+const enrichLink = async (link: string, userAgent?: string): Promise<LinkEnricherResult> => {
   const head = await getHead(link, userAgentHeader(userAgent));
   if (!head) return null;
 
@@ -19,7 +18,7 @@ const enrichLink = async (link: string, userAgent?: string): Promise<Result> => 
   const contentLength = head.headers['content-length'] || '';
   const contentDisposition = head.headers['content-disposition'];
 
-  const result: Result = {};
+  const result: LinkEnricherResult = {};
 
   if (contentType.startsWith('image/')) {
     result.image = file(link, contentType, contentDisposition, contentLength);
