@@ -169,6 +169,23 @@ describe('Parse', () => {
     assert.deepEqual(parse.oembedJSON({
       'version': '1.0',
       'type': 'rich',
+      'author_name': 'Bees',
+      'provider_name': 'SoundCLoud',
+      'html': '<![CDATA[<iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F34378888&show_artwork=true"></iframe>]]>',
+    }), {
+      type: 'rich',
+      title: null,
+      author: { name: 'Bees', url: null },
+      provider: { id: 'SoundCLoud', name: 'SoundCLoud', url: null },
+      thumbnail: null,
+      width: null, height: null,
+      href: 'https://w.soundcloud.com/player/?show_artwork=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F34378888&visual=true',
+      html: '<iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=true&amp;url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F34378888&amp;show_artwork=true"></iframe>',
+    });
+
+    assert.deepEqual(parse.oembedJSON({
+      'version': '1.0',
+      'type': 'rich',
       'html': '<blockqoute>Twit</blockqoute>',
     }), {
       type: 'rich',

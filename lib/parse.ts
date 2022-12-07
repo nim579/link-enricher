@@ -269,7 +269,7 @@ export const oembedJSON = (body: OEmbedJSON): OEmbedResult | null => {
   let href = null;
 
   if (body.html) {
-    const $embed = Cheerio(body.html);
+    const $embed = Cheerio(body.html.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/gi, '$1'));
     html = $embed('iframe').wrap('<div></div>').parent().html();
 
     if (html) {
