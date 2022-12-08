@@ -129,6 +129,55 @@ describe('Parse', () => {
       videos: [],
       audios: []
     });
+
+    const page3 = Cheerio(`
+      <html>
+        <head>
+          <link rel="apple-touch-icon" sizes="256x256" href="https://teletype.in/apple-touch-icon.png" />
+          <link rel="apple-touch-icon" type="image/jpeg" href="/apple-touch-icon.png" />
+
+          <meta name="twitter:image" content="https://teletype.in/og.png">
+          <meta property="og:image" content="http://teletype.in/og.png">
+          <meta property="og:image:secure_url" content="https://teletype.in/og.png">
+          <meta property="og:image:type" content="image/jpeg">
+          <meta property="og:image:width" content="500">
+          <meta property="og:image:height" content="500">
+          <meta property="og:image" content="https://teletype.in/og2.png">
+
+          <meta property="og:video" content="http://teletype.in/og.mp4">
+          <meta property="og:video:secure_url" content="https://teletype.in/og.mp4">
+          <meta property="og:video:type" content="video/webm">
+          <meta property="og:video:width" content="500">
+          <meta property="og:video:height" content="500">
+
+          <meta name="twitter:player" content="https://teletype.in/embed/og.mp4" />
+          <meta name="twitter:player:width" content="720" />
+          <meta name="twitter:player:height" content="720" />
+          <meta name="twitter:player:stream" content="https://teletype.in/og.mp4" />
+          <meta name="twitter:player:stream:content_type" content="video/mp4" />
+        </head>
+      </html>
+    `);
+
+    assert.deepEqual(parse.webpage('https://teletype.in/', page3), {
+      type: 'website',
+      url: 'https://teletype.in/',
+      name: null,
+      title: null,
+      description: null,
+      icons: [
+        { url: 'https://teletype.in/apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/jpeg', width: 256, height: 256 },
+      ],
+      images: [
+        { url: 'https://teletype.in/og.png', type: 'image/jpeg', width: 500, height: 500 },
+        { url: 'https://teletype.in/og2.png', type: 'image/png' },
+      ],
+      videos: [
+        { url: 'https://teletype.in/og.mp4', type: 'video/mp4', width: 500, height: 500 },
+        { url: 'https://teletype.in/embed/og.mp4', type: 'text/html', width: 720, height: 720 },
+      ],
+      audios: []
+    });
   });
 
   it('oembedJSON()', () => {

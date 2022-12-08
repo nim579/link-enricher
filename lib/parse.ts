@@ -250,14 +250,25 @@ export const webpage = (link: string, $: CheerioAPI): WebpageResult => {
     }
   });
 
-  const normalizeMedia = item => {
+  const joinIcons = (list: WebpageIcon[]) => {
+    return _.values(_.groupBy(list, 'url')).map(items => {
+      return items.reduce((mem, item) => ({...mem, ...item}), items[0]);
+    });
+  };
+  const joinMedia = (list: WebpageMedia[]) => {
+    return _.values(_.groupBy(list, 'url')).map(items => {
+      return items.reduce((mem, item) => ({...mem, ...item}), items[0]);
+    });
+  };
+  const normalizeMedia = (item: WebpageMedia) => {
     item.type = item.type || getType(item.url);
     return item;
   };
 
-  images = images.map(normalizeMedia);
-  videos = videos.map(normalizeMedia);
-  audios = audios.map(normalizeMedia);
+  icons  = joinIcons(icons);
+  images = joinMedia(images).map(normalizeMedia);
+  videos = joinMedia(videos).map(normalizeMedia);
+  audios = joinMedia(audios).map(normalizeMedia);
 
   const webpage: WebpageResult = {
     type: type || 'website',
