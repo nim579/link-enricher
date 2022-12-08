@@ -63,6 +63,12 @@ describe('Parse', () => {
           <meta property="og:video:width" content="500">
           <meta property="og:video:height" content="500">
 
+          <meta name="twitter:player" content="https://wakey.io/embed/26" />
+          <meta name="twitter:player:width" content="720" />
+          <meta name="twitter:player:height" content="720" />
+          <meta name="twitter:player:stream" content="https://wakey.io/public/vid/26.mp4" />
+          <meta name="twitter:player:stream:content_type" content="video/mp4" />
+
           <meta property="og:audio" content="http://teletype.in/og.mp3">
           <meta property="og:audio:url" content="/og2.mp3">
           <meta property="og:audio" content="http://teletype.in/og3.mp3">
@@ -96,6 +102,8 @@ describe('Parse', () => {
         { url: 'http://teletype.in/og.mp4', type: 'video/mp4' },
         { url: 'https://teletype.in/og2.mp4', type: 'video/mp4' },
         { url: 'https://teletype.in/og3s.mp4', type: 'video/webm', width: 500, height: 500 },
+        { url: 'https://wakey.io/embed/26', type: 'text/html', width: 720, height: 720 },
+        { url: 'https://wakey.io/public/vid/26.mp4', type: 'video/mp4' },
       ],
       audios: [
         { url: 'http://teletype.in/og.mp3', type: 'audio/mpeg' },

@@ -195,8 +195,15 @@ export const webpage = (link: string, $: CheerioAPI): WebpageResult => {
     }
     case 'og:video':
     case 'og:video:url':
+    case 'twitter:player:stream':
       videos.push({
         url: urlResolve(value, link),
+      });
+      break;
+    case 'twitter:player':
+      videos.push({
+        url: urlResolve(value, link),
+        type: 'text/html',
       });
       break;
     case 'og:video:secure_url': {
@@ -204,18 +211,21 @@ export const webpage = (link: string, $: CheerioAPI): WebpageResult => {
       if (video) video.url = urlResolve(value, link);
       break;
     }
-    case 'og:video:type': {
+    case 'og:video:type':
+    case 'twitter:player:stream:content_type': {
       const video = _.last(videos);
       if (video && !video.type) video.type = value;
       break;
     }
-    case 'og:video:width': {
+    case 'og:video:width':
+    case 'twitter:player:width': {
       const video = _.last(videos);
       const width = parseInt(value);
       if (video && !video.width && !isNaN(width)) video.width = width;
       break;
     }
-    case 'og:video:height': {
+    case 'og:video:height':
+    case 'twitter:player:height': {
       const video = _.last(videos);
       const height = parseInt(value);
       if (video && !video.height && !isNaN(height)) video.height = height;
