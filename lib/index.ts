@@ -1,4 +1,4 @@
-import { getHead, getHtml, getJSON } from './fetch';
+import { FetchOptions, getHead, getHtml, getJSON } from './fetch';
 import { file, FileResult, html, oembedJSON, OEmbedResult, oembedXML, WebpageResult } from './parse';
 import { userAgentHeader } from './utils';
 
@@ -10,8 +10,10 @@ export type LinkEnricherResult = {
   oembed?: OEmbedResult;
 };
 
-const enrichLink = async (link: string, userAgent?: string): Promise<LinkEnricherResult> => {
-  const head = await getHead(link, userAgentHeader(userAgent));
+const enrichLink = async (link: string, userAgent?: string, reqOptions?: FetchOptions): Promise<LinkEnricherResult> => {
+  const options = { ...userAgentHeader(userAgent), ...reqOptions };
+
+  const head = await getHead(link, options);
   if (!head) return null;
 
   const contentType = head.headers['content-type'] || 'text/plain';
@@ -34,11 +36,11 @@ const enrichLink = async (link: string, userAgent?: string): Promise<LinkEnriche
 
     if (oembed.json || oembed.xml) {
       const json = oembed.json
-        ? oembedJSON(await getJSON(oembed.json, userAgentHeader(userAgent)))
+        ? oembedJSON(await getJSON(oembed.json, options))
         : null;
 
       const xml = oembed.xml
-        ? oembedXML(await getHtml(oembed.xml, userAgentHeader(userAgent)))
+        ? oembedXML(await getHtml(oembed.xml, options))
         : null;
 
       result.oembed = {...xml, ...json};

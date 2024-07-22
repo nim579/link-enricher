@@ -1,6 +1,8 @@
-import got, { Response, OptionsOfJSONResponseBody, OptionsOfTextResponseBody } from 'got';
+import got, { Response, OptionsOfJSONResponseBody, OptionsOfTextResponseBody, Options } from 'got';
 
-export const getHead = (link: string, options?: any): Promise<null|Response> => {
+export type FetchOptions = Pick<Options, 'agent' | 'headers' | 'hooks' | 'cookieJar'>;
+
+export const getHead = (link: string, options?: FetchOptions): Promise<null|Response> => {
   return new Promise((resolve) => {
     const req = got.stream(link, options);
 
@@ -19,7 +21,7 @@ export const getHead = (link: string, options?: any): Promise<null|Response> => 
   });
 };
 
-export const getHtml = async (link: string, reqOptions?: any): Promise<string|null> => {
+export const getHtml = async (link: string, reqOptions?: FetchOptions): Promise<string|null> => {
   const options: OptionsOfTextResponseBody = { ...reqOptions, retry: 0, responseType: 'text', isStream: false };
 
   try {
@@ -30,7 +32,7 @@ export const getHtml = async (link: string, reqOptions?: any): Promise<string|nu
   }
 };
 
-export const getJSON = async (link: string, reqOptions?: any): Promise<any|null> => {
+export const getJSON = async (link: string, reqOptions?: FetchOptions): Promise<any|null> => {
   const options: OptionsOfJSONResponseBody = { ...reqOptions, retry: 0, responseType: 'json', isStream: false };
 
   try {
