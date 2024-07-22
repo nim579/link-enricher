@@ -27,7 +27,7 @@ const enrichLink = async (link: string, userAgent?: string, reqOptions?: FetchOp
   } else if (contentType.startsWith('video/')) {
     result.video = file(link, contentType, contentDisposition, contentLength);
   } else if (contentType.startsWith('text/html')) {
-    const body = await getHtml(link, userAgentHeader(userAgent));
+    const body = await getHtml(link, options);
     const { webpage, oembed } = await html(link, body);
 
     if (webpage) {
